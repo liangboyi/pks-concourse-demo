@@ -5,6 +5,7 @@ harbor_repository: ((harbor_url)):443/devops/demo
 harbor_insecure_registry: ((harbor_url)):443
 git_repository: http://gitlab.pks.vxflex.poc/root/devops-demo
 k8s_resource: ((harbor_url))/devops/kubernetes-resource
+#k8s_resource: zlabjp/kubernetes-resource
 k8s_cluster_url: https://pks-cluster01.pks.vxflex.poc:8443 
 k8s_namespace: gray
 k8s_ca: |-

@@ -1,3 +1,4 @@
+#FROM openjdk:8-jdk-alpine
 FROM harbor.pks.vxflex.poc/devops/maven-build-env
 RUN mkdir demo
 COPY . demo
