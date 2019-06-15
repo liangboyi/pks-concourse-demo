@@ -1,0 +1,16 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: demo
+  name: demo-ingress
+spec:
+  rules:
+  - host: build-demo.pks.vxflex.poc
+    http:
+      paths:
+      - backend:
+          serviceName: my-blue-green-service
+          servicePort: 8989
+        path: /

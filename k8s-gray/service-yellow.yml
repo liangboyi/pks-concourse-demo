@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-yellow-service
+spec:
+  selector:
+    app: my-app
+    version: yellow
+  ports:
+  - protocol: TCP
+    port: 8989
+    targetPort: 9999

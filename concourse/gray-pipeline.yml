@@ -1,0 +1,53 @@
+resource_types:
+- name: kubernetes
+  type: docker-image
+  source:
+    repository: {{k8s_resource}}
+    insecure_registries:
+    - {{harbor_insecure_registry}}
+
+resources:
+- name: git-concourse-demo
+  type: git
+  source:
+    uri: {{git_repository}}
+    branch: master
+
+- name: harbor-image
+  type: docker-image
+  source:
+    repository: {{harbor_repository}}
+    username: {{harbor_username}}
+    password: {{harbor_password}}
+    insecure_registries: 
+    - {{harbor_insecure_registry}}
+
+- name: kubernetes-res
+  type: kubernetes
+  source:
+    server: {{k8s_cluster_url}}
+    namespace: {{k8s_namespace}}
+    token: {{k8s_admin_token}}
+#    certificate_authority: {{k8s_ca}}
+    insecure_skip_tls_verify: true
+
+jobs:
+- name: build-docker-image
+  public: true
+  serial: true
+  plan:
+  - get: git-concourse-demo
+  - put: harbor-image
+    params:
+      build: git-concourse-demo
+- name: kubernetes-deploy-gray
+  plan:
+  - get: git-concourse-demo
+  - get: harbor-image
+    passed: [build-docker-image]
+    trigger: true
+  - put: kubernetes-res
+    params:
+      kubectl: apply -f git-concourse-demo/k8s-gray 
+      wait_until_ready_selector: app=my-app
+

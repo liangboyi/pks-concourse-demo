@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deployment-green
+  labels:
+    app: my-app
+    version: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+      version: green
+  template:
+    metadata:
+      labels:
+        app: my-app
+        version: green
+    spec:
+      containers:
+      - name: my-app
+        image: harbor.pks.vxflex.poc/devops/demo:green 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9999

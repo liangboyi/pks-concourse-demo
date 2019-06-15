@@ -1,0 +1,15 @@
+harbor_username: YOUR-USERNAME
+harbor_password: YOUR-PASSWORD
+harbor_url: harbor.pks.vxflex.poc
+harbor_repository: ((harbor_url)):443/devops/demo
+harbor_insecure_registry: ((harbor_url)):443
+git_repository: http://gitlab.pks.vxflex.poc/root/devops-demo
+k8s_resource: ((harbor_url))/devops/kubernetes-resource
+k8s_cluster_url: https://pks-cluster01.pks.vxflex.poc:8443 
+k8s_namespace: build-demo
+k8s_ca: |-
+  Ci0tLS0tQkVHSU4gQ0VSVE.....l
+k8s_admin_user: pks-admin
+k8s_admin_token: |-
+  eyJhbGciOiJSUzI1NiIsImtpZ....C
+clair_image: ((harbor_url))/devops/demo

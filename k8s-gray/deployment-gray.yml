@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deployment-gray
+  labels:
+    app: my-app
+    version: gray
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+      version: gray
+  template:
+    metadata:
+      labels:
+        app: my-app
+        version: gray
+    spec:
+      containers:
+      - name: my-app
+        image: harbor.pks.vxflex.poc/devops/demo:gray
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9999
